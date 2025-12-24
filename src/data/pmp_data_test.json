@@ -1,0 +1,10 @@
+{
+  "tasks": [
+    { "id": "init-01", "content": "Select project manager", "group": "INITIATING" },
+    { "id": "init-02", "content": "Determine company culture and existing systems", "group": "INITIATING" },
+    { "id": "init-03", "content": "Collect processes, procedures and historical information", "group": "INITIATING" },
+    { "id": "init-04", "content": "Divide large projects into phases", "group": "INITIATING" },
+    { "id": "init-05", "content": "Understand the business case", "group": "INITIATING" },
+    { "id": "init-08", "content": "Create measurable objectives", "group": "INITIATING" }
+  ]
+}

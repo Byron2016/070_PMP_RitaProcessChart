@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Management Processes</title>
+    <link rel="stylesheet" href="./src/css/style.css" />
+  </head>
+  <body>
+    <div class="contenedor">
+      <!-- <div class="columna" id="pending">
+        <h3>PENDING</h3>
+        <div class="item" id="item-1" draggable="true">Project Charter</div>
+        <div class="item" id="item-2" draggable="true">Stakeholder Matrix</div>
+      </div> -->
+      <div class="columna" id="pending">
+        <div class="col-header">
+          <h3>PENDING</h3>
+          <button
+            id="shuffle-btn"
+            class="btn-icon-shuffle"
+            title="Shuffle tasks"
+          >
+            <svg
+              viewBox="0 0 512 512"
+              width="18"
+              height="18"
+              fill="currentColor"
+            >
+              <path
+                d="M403.8 34.4c12.5-12.5 32.8-12.5 45.3 0l64 64c12.5 12.5 12.5 32.8 0 45.3l-64 64c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L426.7 144H352c-26.5 0-48 21.5-48 48s21.5 48 48 48h32c70.7 0 128 57.3 128 128s-57.3 128-128 128H336c-17.7 0-32-14.3-32-32s14.3-32 32-32h16c35.3 0 64-28.7 64-64s-28.7-64-64-64H320c-70.7 0-128-57.3-128-128s57.3-128 128-128h32l-22.6-22.6c-12.5-12.5-12.5-32.8 0-45.3l64-64zM108.2 477.6c-12.5 12.5-32.8 12.5-45.3 0l-64-64c-12.5-12.5-12.5-32.8 0-45.3l64-64c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L85.3 328H160c26.5 0 48-21.5 48-48s-21.5-48-48-48H128C57.3 232 0 174.7 0 104S57.3 -24 128 -24H144c17.7 0 32 14.3 32 32s-14.3 32-32 32H128c-35.3 0-64 28.7-64 64s28.7 64 64 64h32c70.7 0 128 57.3 128 128s-57.3 128-128 128H96l22.6 22.6c12.5 12.5 12.5 32.8 0 45.3l-64 64z"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="filter-container">
+          <input
+            type="text"
+            id="task-filter"
+            placeholder="Filter tasks..."
+            class="filter-input"
+          />
+          <button
+            id="clear-filter"
+            class="btn-clear-input"
+            title="Clear search"
+          >
+            &times;
+          </button>
+        </div>
+      </div>
+
+      <div class="super-columna" id="completed">
+        <div class="col-header-container">
+          <div class="title-row">
+            <h2>COMPLETED</h2>
+            <div class="global-controls">
+              <button
+                id="reset-all-btn"
+                class="btn-icon-shuffle"
+                title="Reset all to pending"
+              >
+                <svg
+                  viewBox="0 0 512 512"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"
+                  />
+                </svg>
+              </button>
+
+              <button
+                id="evaluate-btn"
+                class="btn-icon-shuffle"
+                title="Evaluate results"
+              >
+                <svg
+                  viewBox="0 0 512 512"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="stats-row" id="stats-completed">
+            Pendientes: <span class="stat-val">0%</span> | Aciertos totales:
+            <span class="stat-val">0%</span>
+          </div>
+        </div>
+
+        <div class="fases-container">
+          <div class="columna" id="initiating">
+            <div class="col-header-container">
+              <div class="title-row">
+                <h3>INITIATING</h3>
+                <button
+                  class="btn-clear-column"
+                  onclick="clearToPending('initiating')"
+                  title="Clear column"
+                >
+                  <svg
+                    viewBox="0 0 512 512"
+                    width="14"
+                    height="14"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div class="stats-row" id="stats-initiating">
+                Aciertos: <span class="stat-val">0%</span> | Orden:
+                <span class="stat-val">0%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="columna" id="planning">
+            <div class="col-header-container">
+              <div class="title-row">
+                <h3>PLANNING</h3>
+                <button
+                  class="btn-clear-column"
+                  onclick="clearToPending('planning')"
+                  title="Clear column"
+                >
+                  <svg
+                    viewBox="0 0 512 512"
+                    width="14"
+                    height="14"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div class="stats-row" id="stats-planning">
+                Aciertos: <span class="stat-val">0%</span> | Orden:
+                <span class="stat-val">0%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="columna" id="executing">
+            <div class="col-header-container">
+              <div class="title-row">
+                <h3>EXECUTING</h3>
+                <button
+                  class="btn-clear-column"
+                  onclick="clearToPending('executing')"
+                  title="Clear column"
+                >
+                  <svg
+                    viewBox="0 0 512 512"
+                    width="14"
+                    height="14"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div class="stats-row" id="stats-executing">
+                Aciertos: <span class="stat-val">0%</span> | Orden:
+                <span class="stat-val">0%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="columna" id="monitoring">
+            <div class="col-header-container">
+              <div class="title-row">
+                <h3>MONITORING & CONTROLLING</h3>
+                <button
+                  class="btn-clear-column"
+                  onclick="clearToPending('monitoring')"
+                  title="Clear column"
+                >
+                  <svg
+                    viewBox="0 0 512 512"
+                    width="14"
+                    height="14"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div class="stats-row" id="stats-monitoring">
+                Aciertos: <span class="stat-val">0%</span> | Orden:
+                <span class="stat-val">0%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="columna" id="closing">
+            <div class="col-header-container">
+              <div class="title-row">
+                <h3>CLOSING</h3>
+                <button
+                  class="btn-clear-column"
+                  onclick="clearToPending('closing')"
+                  title="Clear column"
+                >
+                  <svg
+                    viewBox="0 0 512 512"
+                    width="14"
+                    height="14"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div class="stats-row" id="stats-closing">
+                Aciertos: <span class="stat-val">0%</span> | Orden:
+                <span class="stat-val">0%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-evaluacion" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Resultados de Evaluación</h2>
+        <hr />
+        <div id="resultados-lista"></div>
+      </div>
+    </div>
+
+    <script src="./src/js/script.js"></script>
+  </body>
+</html>

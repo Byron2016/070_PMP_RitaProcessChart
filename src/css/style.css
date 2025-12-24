@@ -1,0 +1,479 @@
+/* =========================================
+   1. CONFIGURACIÓN GENERAL
+   ========================================= */
+body {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Contenedor del título y el botón */
+.col-header {
+  /*luego debería borrarse */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  line-height: 1;
+}
+
+.col-header-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  line-height: 1;
+}
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Mantiene el ícono alineado con la parte superior del texto */
+  width: 100%;
+}
+
+.stats-row {
+  font-size: 0.65rem; /* Más pequeño que el título */
+  color: #6b778c; /* Gris suave */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.stat-val {
+  font-weight: bold;
+  color: #172b4d; /* Resalta el valor numérico */
+}
+
+/* Colores dinámicos para los números */
+.stat-low {
+  color: #eb5757;
+  font-weight: bold;
+}
+.stat-medium {
+  color: #f2994a;
+  font-weight: bold;
+}
+.stat-high {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+/* Ajuste del H3 para que no tenga márgenes que rompan la alineación */
+.col-header h3 {
+  /* se tendría que eliminar */
+  margin: 0;
+  font-size: 0.75rem;
+  color: #5e6c84;
+  text-transform: uppercase;
+}
+
+.title-row h3 {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #5e6c84;
+  text-transform: uppercase;
+}
+
+/* Cabecera superior de la columna completed */
+.super-col-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Contenedor de botones grupales */
+.global-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Estilo base para botones de control */
+.btn-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-control svg {
+  flex-shrink: 0;
+}
+
+/* Botón Reset (Estilo similar al borrar interno) */
+.btn-control.reset {
+  background-color: #eb5757;
+  color: white;
+}
+
+.btn-control.reset:hover {
+  background-color: #cf2a2a;
+  transform: translateY(-1px);
+}
+
+/* Botón Evaluate (Azul institucional) */
+.btn-control.evaluate {
+  background-color: #0052cc;
+  color: white;
+}
+
+.btn-control.evaluate:hover {
+  background-color: #0747a6;
+  transform: translateY(-1px);
+}
+
+/* Estilo específico para resaltar el botón de evaluación cuando pases el mouse */
+#evaluate-btn:hover {
+  color: #36b37e; /* Verde para evaluación */
+}
+
+#reset-all-btn:hover {
+  color: #ff5630; /* Rojo/Naranja para reset */
+}
+
+/* Estilo del botón de ícono */
+.btn-icon-shuffle {
+  background: none;
+  border: none;
+  color: #5e6c84;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s, transform 0.2s;
+  padding: 5px;
+}
+
+.btn-icon-shuffle:hover {
+  color: #0052cc;
+  transform: rotate(15deg); /* Efecto juguetón al pasar el mouse */
+}
+
+.btn-icon-shuffle:active {
+  transform: scale(0.9);
+}
+
+.btn-clear-column {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: all 0.2s;
+  margin-top: -2px; /* Ajuste fino para centrarlo visualmente con la primera línea de texto */
+}
+
+.btn-clear-column:hover {
+  color: #eb5757; /* Color rojizo para indicar "borrar/quitar" */
+  background-color: rgba(235, 87, 87, 0.1);
+}
+
+.contenedor {
+  display: flex;
+  gap: 25px;
+  align-items: flex-start;
+  max-width: 100%;
+}
+
+/* =========================================
+   2. ESTILO DE COLUMNAS (PENDING Y FASES)
+   ========================================= */
+.columna {
+  background-color: #ebedf0;
+  width: 200px;
+  min-height: 500px;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid transparent;
+  transition: background-color 0.2s, border 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Títulos de las columnas */
+.columna h3 {
+  font-size: 0.75rem;
+  color: #5e6c84;
+  text-transform: uppercase;
+  /* margin: 0 0 15px 0; */
+  margin: 0;
+  letter-spacing: 0.5px;
+  text-align: left;
+  line-height: 1.2;
+}
+
+/* Estado cuando arrastras algo sobre la columna */
+.columna-hover {
+  background-color: #e2eafc;
+  border: 2px dashed #4a90e2;
+}
+
+/* =========================================
+   3. SÚPER COLUMNA "COMPLETED"
+   ========================================= */
+.super-columna {
+  background-color: #dfe1e6;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #c1c7d0;
+}
+
+/* Asegurar que el H2 de Completed se comporte como el H3 de las columnas */
+.super-columna .col-header h2 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #172b4d;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.super-columna h2 {
+  margin: 0 0 15px 0;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #172b4d;
+  font-weight: 700;
+}
+
+.fases-container {
+  display: flex;
+  gap: 12px;
+  /* Permite que las columnas bajen a la siguiente línea en tablets si no caben */
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* =========================================
+   4. ESTILO DE LOS ITEMS (TARJETAS)
+   ========================================= */
+.item {
+  background-color: #ffffff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  cursor: grab;
+  font-size: 0.9rem;
+  color: #172b4d;
+  border-left: 4px solid #4a90e2; /* Detalle de color lateral */
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.item:hover {
+  background-color: #f4f5f7;
+}
+
+.item:active {
+  cursor: grabbing;
+}
+
+/* Estilo para el ítem mientras se arrastra */
+.item.dragging {
+  opacity: 0.5;
+  transform: scale(0.95);
+}
+
+/* =========================================
+   5. COLORES POR FASE (OPCIONAL)
+   ========================================= */
+#initiating {
+  border-top: 5px solid #ffab00;
+} /* Amarillo */
+#planning {
+  border-top: 5px solid #0052cc;
+} /* Azul */
+#executing {
+  border-top: 5px solid #36b37e;
+} /* Verde */
+#monitoring {
+  border-top: 5px solid #ff5630;
+} /* Naranja/Rojo */
+#closing {
+  border-top: 5px solid #6554c0;
+} /* Morado */
+
+.item {
+  transition: transform 0.2s ease;
+}
+
+.dragging {
+  opacity: 0.5;
+  transform: scale(0.95);
+}
+
+/* Espacio fantasma que indica dónde caerá la tarjeta */
+.placeholder {
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  min-height: 50px; /* Ajusta según el alto promedio de tus items */
+  transition: all 0.1s ease-out;
+}
+
+/* Responsividad: si la pantalla es pequeña, permite scroll horizontal */
+@media (max-width: 1200px) {
+  body {
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+}
+
+/* Ajuste para Tablets y Móviles */
+@media (max-width: 1024px) {
+  .contenedor {
+    flex-direction: column; /* Apila Pending arriba y Completed abajo */
+    align-items: center;
+  }
+
+  .columna {
+    width: 90%; /* Ocupa casi todo el ancho disponible */
+    max-width: 400px;
+    margin-bottom: 20px;
+  }
+
+  .fases-container {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+/* FILTER  */
+.filter-container {
+  position: relative; /* Para posicionar el botón dentro */
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.filter-input {
+  width: 100%;
+  padding: 8px 30px 8px 12px; /* Espacio a la derecha para que el texto no tape la X */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  box-sizing: border-box; /* Para que el padding no desborde el ancho */
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: #0052cc; /* Azul igual que tus botones */
+  box-shadow: 0 0 0 2px rgba(0, 82, 204, 0.2);
+}
+
+.btn-clear-input {
+  position: absolute;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #888;
+  cursor: pointer;
+  display: none; /* Se oculta por defecto */
+  line-height: 1;
+}
+
+.btn-clear-input:hover {
+  color: #eb5757; /* Rojo institucional al pasar el mouse */
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.resultado-item {
+  margin: 15px 0;
+  font-family: sans-serif;
+}
+
+.resultado-item strong {
+  color: #0052cc;
+}
+
+.resultado-grupo {
+  background-color: #f4f5f7;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  border-left: 5px solid #0052cc;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Título del grupo */
+.resultado-grupo h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #172b4d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Línea de datos en horizontal */
+.grupo-data-line {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre los elementos */
+  font-size: 0.85rem;
+  color: #444;
+}
+
+/* Separador visual */
+.data-separator {
+  color: #ccc;
+  font-weight: bold;
+}
+
+.data-item strong {
+  color: #0052cc;
+}
